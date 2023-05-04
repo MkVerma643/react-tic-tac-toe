@@ -79,7 +79,7 @@ const App = () => {
     }
 
     if (itemArray[itemNumber] === "empty") {
-      itemArray[itemNumber] = isCross ? "cross" : "circle";
+      itemArray[itemNumber] = isCross ? "circle" : "cross";
       setIsCross(!isCross);
     } else if (itemArray.every((val) => val !== "empty")) {
       return setWinMessage("Match Draw");
@@ -106,12 +106,12 @@ const App = () => {
             </div>
           ) : (
             <h1 className="text-center text-warning">
-              {isCross ? "Cross" : "Circle"} turns
+              {isCross ? "Circle" : "Cross"} Turns
             </h1>
           )}
           <div className="grid">
             {itemArray.map((item, index) => (
-              <Card color="warning" onClick={() => changeItem(index)}>
+              <Card color="light" onClick={() => changeItem(index)}>
                 <CardBody className="box">
                   <Icon name={item} />
                 </CardBody>
