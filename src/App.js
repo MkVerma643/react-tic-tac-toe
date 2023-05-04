@@ -22,7 +22,55 @@ const App = () => {
   };
 
   const checkIsWinner = () => {
-    //
+    if (
+      itemArray[0] === itemArray[1] &&
+      itemArray[0] === itemArray[2] &&
+      itemArray[0] !== "empty"
+    ) {
+      setWinMessage(`${itemArray[0]} Wins`);
+    } else if (
+      itemArray[3] !== "empty" &&
+      itemArray[3] === itemArray[4] &&
+      itemArray[4] === itemArray[5]
+    ) {
+      setWinMessage(`${itemArray[3]} Wins`);
+    } else if (
+      itemArray[6] !== "empty" &&
+      itemArray[6] === itemArray[7] &&
+      itemArray[7] === itemArray[8]
+    ) {
+      setWinMessage(`${itemArray[6]} Wins`);
+    } else if (
+      itemArray[0] !== "empty" &&
+      itemArray[0] === itemArray[3] &&
+      itemArray[3] === itemArray[6]
+    ) {
+      setWinMessage(`${itemArray[0]} Wins`);
+    } else if (
+      itemArray[1] !== "empty" &&
+      itemArray[1] === itemArray[4] &&
+      itemArray[4] === itemArray[7]
+    ) {
+      setWinMessage(`${itemArray[1]} Wins`);
+    } else if (
+      itemArray[2] !== "empty" &&
+      itemArray[2] === itemArray[5] &&
+      itemArray[5] === itemArray[8]
+    ) {
+      setWinMessage(`${itemArray[2]} Wins`);
+    } else if (
+      itemArray[0] !== "empty" &&
+      itemArray[0] === itemArray[4] &&
+      itemArray[4] === itemArray[8]
+    ) {
+      setWinMessage(`${itemArray[0]} Wins`);
+    } else if (
+      itemArray[2] !== "empty" &&
+      itemArray[2] === itemArray[4] &&
+      itemArray[4] === itemArray[6]
+    ) {
+      setWinMessage(`${itemArray[2]} Wins`);
+    }
   };
 
   const changeItem = (itemNumber) => {
@@ -33,8 +81,10 @@ const App = () => {
     if (itemArray[itemNumber] === "empty") {
       itemArray[itemNumber] = isCross ? "cross" : "circle";
       setIsCross(!isCross);
+    } else if (itemArray.every((val) => val !== "empty")) {
+      return setWinMessage("Match Draw");
     } else {
-      return toast("already filled", { type: "error" });
+      return toast("Already Filled", { type: "error" });
     }
 
     checkIsWinner();
@@ -61,7 +111,7 @@ const App = () => {
           )}
           <div className="grid">
             {itemArray.map((item, index) => (
-              <Card>
+              <Card color="warning" onClick={() => changeItem(index)}>
                 <CardBody className="box">
                   <Icon name={item} />
                 </CardBody>
